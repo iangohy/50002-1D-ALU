@@ -1,9 +1,10 @@
-# 50.002 1D ALU 
+# 50.002 1D ALU
 
 ## Members
  - [Ian Goh](https://github.com/iangohy)
  - [Lester Leong](https://github.com/blue-plum-cloud)
  - [Joyce Lim](https://github.com/joyceeqq)
+ - [Shaun Neo](https://github.com/shaunneo)
 
 ## Collaborating
 Clone the repository using `git clone`:
