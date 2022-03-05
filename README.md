@@ -5,6 +5,7 @@
  - [Lester Leong](https://github.com/blue-plum-cloud)
  - [Joyce Lim](https://github.com/joyceeqq)
  - [Shaun Neo](https://github.com/shaunneo)
+ - [Li Ling](https://github.com/Sprittoo)
 
 ## Collaborating
 Clone the repository using `git clone`:
