@@ -8,7 +8,6 @@
 
 ## Collaborating
 Clone the repository using `git clone`:
-hello
 ```
 git clone https://github.com/iangohy/50002-1D-ALU.git
 ```
