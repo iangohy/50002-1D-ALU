@@ -2,7 +2,7 @@
 
 ## Members
  - [Ian Goh](https://github.com/iangohy)
- -
+ - [Joyce Lim](https://github.com/joyceeqq)
  
 
 ## Collaborating
