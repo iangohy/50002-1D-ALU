@@ -2,8 +2,8 @@
 
 ## Members
  - [Ian Goh](https://github.com/iangohy)
+ - [Lester Leong](https://github.com/blue-plum-cloud)
  - [Joyce Lim](https://github.com/joyceeqq)
- 
 
 ## Collaborating
 Clone the repository using `git clone`:
