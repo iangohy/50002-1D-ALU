@@ -1,0 +1,7 @@
+Warnings in file /home/ian/Documents/50002-1D-ALU/source/au_top.luc:
+    Line 11, Column 4 : "io_dip" was never used
+    Line 10, Column 4 : "io_button" was never used
+Starting Vivado...
+Vivado exited.
+
+Finished building project.
