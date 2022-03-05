@@ -6,6 +6,7 @@
  - [Joyce Lim](https://github.com/joyceeqq)
  - [Shaun Neo](https://github.com/shaunneo)
  - [Li Ling](https://github.com/Sprittoo)
+ - [Michael Chun](https://github.com/mckp0)
 
 ## Collaborating
 Clone the repository using `git clone`:
