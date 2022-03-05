@@ -2,7 +2,7 @@
 
 ## Members
  - [Ian Goh](https://github.com/iangohy)
- -
+ - [Lester Leong](https://github.com/blue-plum-cloud)
  
 
 ## Collaborating
