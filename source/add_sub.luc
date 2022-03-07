@@ -1,0 +1,10 @@
+module add_sub (
+    input clk,  // clock
+    input rst,  // reset
+    output out
+  ) {
+
+  always {
+    out = 0;
+  }
+}
