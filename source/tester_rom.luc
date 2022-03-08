@@ -4,8 +4,15 @@ module tester_rom (
   ) {
 
   // Reverse left-right order from states!
-  // States: 
-  const TESTS = {60h4, 60h4};
+  // States: INIT,SHL,SHR,SHA
+  // No of bits smaller for shifter only
+  // 16 + 16 (B uses only least 5) + 8 (ALUFN) + 16 + zvn (ignore for now) = 60 bits
+  
+  // SHL 0xFFFF << 0x001F = 0x8000
+  // SHR 0xFFFF >> 0x001F = 0x0001
+  // SHA 0x8000 >> 0x001F = 0xFFFF
+  
+  const TESTS = {60h8000001F23FFFF0,60hFFFF001F2100010,60hFFFF001F2080000,60h0};
   
   always {
     testcase = TESTS[address];
