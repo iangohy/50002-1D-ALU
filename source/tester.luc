@@ -1,10 +1,92 @@
 module tester (
     input clk,  // clock
     input rst,  // reset
-    output out
+    input startTest, // switch to start the test
+    output counter[5],
+    output error
   ) {
+  
+  fsm testerfsm(.clk(clk), .rst(rst)) = {INIT,ADD1,ADD2,ADD3};
+  counter slowClock(#SIZE(1), #DIV(26), .clk(clk), .rst(rst));
+  counter slowCounter(#SIZE(5), #DIV(26), .clk(clk), .rst(rst));
+  edge_detector slowClockEdge(.clk(clk));
+  alu alu16;
+  tester_rom testerrom;
+  
+  sig romdata[60];
 
   always {
-    out = 0;
+    slowClockEdge.in = slowClock.value;
+    
+    // base outputs
+    counter = 5b0;
+    error = 0;
+    testerrom.address = 0;
+    alu16.a = 0;
+    alu16.b = 0;
+    alu16.alufn = 0;
+    
+    case(testerfsm.q) {  
+      testerfsm.INIT:
+        if (slowClockEdge.out == b1 && startTest == b1) { //only trigger change when slowClockEdge gives a 1
+          testerfsm.d = testerfsm.ADD1;
+        }   
+      testerfsm.ADD1:
+        counter = slowCounter.value;
+        testerrom.address = slowCounter.value;
+        counter = slowCounter.value;
+        romdata = testerrom.testcase;
+        alu16.a = romdata[59:44];
+        alu16.b = romdata[43:28];
+        alu16.alufn = romdata[25:20];
+        
+        if (alu16.out == romdata[19:4] && alu16.zvn == romdata[2:0]) {
+          error = 0;
+        } else {
+          error = 1;
+        }
+        
+        if (slowClockEdge.out == b1) { //only trigger change when slowClockEdge gives a 1
+          testerfsm.d = testerfsm.ADD2;
+        }
+        
+      testerfsm.ADD2:
+        counter = slowCounter.value;
+        testerrom.address = slowCounter.value;
+        counter = slowCounter.value;
+        romdata = testerrom.testcase;
+        alu16.a = romdata[59:44];
+        alu16.b = romdata[43:28];
+        alu16.alufn = romdata[25:20];
+        
+        if (alu16.out == romdata[19:4] && alu16.zvn == romdata[2:0]) {
+          error = 0;
+        } else {
+          error = 1;
+        }
+        
+        if (slowClockEdge.out == b1) { //only trigger change when slowClockEdge gives a 1
+          testerfsm.d = testerfsm.ADD3;
+        }
+        
+      testerfsm.ADD3:
+        counter = slowCounter.value;
+        testerrom.address = slowCounter.value;
+        counter = slowCounter.value;
+        romdata = testerrom.testcase;
+        alu16.a = romdata[59:44];
+        alu16.b = romdata[43:28];
+        alu16.alufn = romdata[25:20];
+        
+        if (alu16.out == romdata[19:4] && alu16.zvn == romdata[2:0]) {
+          error = 0;
+        } else {
+          error = 1;
+        }
+        
+        if (slowClockEdge.out == b1) { //only trigger change when slowClockEdge gives a 1
+          testerfsm.d = testerfsm.ADD1;
+        }
+    }
   }
 }

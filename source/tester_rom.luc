@@ -1,0 +1,13 @@
+module tester_rom (
+    input address[5],
+    output testcase[60]
+  ) {
+
+  // Reverse left-right order from states!
+  // States: 
+  const TESTS = {60h4, 60h4};
+  
+  always {
+    testcase = TESTS[address];
+  }
+}
