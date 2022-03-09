@@ -35,6 +35,6 @@ module au_top (
     
     io_led[0] = testershifter.counter;
     io_led[1][0] = testershifter.error;
-    testershifter.force_error = io_dip[1][0];
+    testershifter.force_error = io_dip[0][0];
   }
 }
