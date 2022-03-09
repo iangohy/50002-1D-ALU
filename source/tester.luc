@@ -1,12 +1,11 @@
 module tester (
     input clk,  // clock
     input rst,  // reset
-    input startTest, // switch to start the test
     output counter[5],
     output error
   ) {
   
-  fsm testerfsm(.clk(clk), .rst(rst)) = {INIT,ADD1,ADD2,ADD3};
+  fsm testerfsm(.clk(clk), .rst(rst)) = {INIT,ADD1,ADD2,SUB1,SUB2,END};
   counter slowClock(#SIZE(1), #DIV(26), .clk(clk), .rst(rst));
   counter slowCounter(#SIZE(5), #DIV(26), .clk(clk), .rst(rst));
   edge_detector slowClockEdge(.clk(clk));
@@ -28,7 +27,7 @@ module tester (
     
     case(testerfsm.q) {  
       testerfsm.INIT:
-        if (slowClockEdge.out == b1 && startTest == b1) { //only trigger change when slowClockEdge gives a 1
+        if (slowClockEdge.out == b1) { //only trigger change when slowClockEdge gives a 1
           testerfsm.d = testerfsm.ADD1;
         }   
       testerfsm.ADD1:
@@ -66,10 +65,10 @@ module tester (
         }
         
         if (slowClockEdge.out == b1) { //only trigger change when slowClockEdge gives a 1
-          testerfsm.d = testerfsm.ADD3;
+          testerfsm.d = testerfsm.SUB1;
         }
         
-      testerfsm.ADD3:
+      testerfsm.SUB1:
         counter = slowCounter.value;
         testerrom.address = slowCounter.value;
         counter = slowCounter.value;
@@ -85,8 +84,12 @@ module tester (
         }
         
         if (slowClockEdge.out == b1) { //only trigger change when slowClockEdge gives a 1
-          testerfsm.d = testerfsm.ADD1;
+          testerfsm.d = testerfsm.SU2;
         }
+        
+      testerfsm.END:
+        counter = 8hFF;
+        error = 0;
     }
   }
 }

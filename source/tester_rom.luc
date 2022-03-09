@@ -1,11 +1,23 @@
 module tester_rom (
-    input address[5],
-    output testcase[60]
+    input address[5],     // Address of test case
+    output testcase[60]   // A[59:44] B[43:28] ALUFN[27:20] ALU[19:4] zvn[3:0]
+
+
   ) {
 
   // Reverse left-right order from states!
-  // States: 
-  const TESTS = {60h4, 60h4};
+  // {SUB2,SUB1,ADD2,ADD1}
+  const TESTADDSUB = {60h80007FFF0100012,60hFFFFFFFF0100004,60hFFFF00020000012,60h800000010080011};
+  //
+  const TESTMUL = {};
+  //
+  const TESTBOOL = {};
+  //
+  const TESTSHIFT = {};
+  //
+  const TESTCOMP = {};
+  // ROM address 0 not used (1 indexing for test cases)
+  const TESTS = c{TESTCOMP,TESTSHIFT,TESTBOOL,TESTMUL,TESTADDSUB,60h0};
   
   always {
     testcase = TESTS[address];
