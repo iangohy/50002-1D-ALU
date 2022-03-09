@@ -1,13 +1,13 @@
 module four_bit_multiplier (
-    input a[4],  // input 2bit multiplicand a
-    input b[4],  // input 2bit multiplier b
+    input a[4],  // input 4bit multiplicand a
+    input b[4],  // input 4bit multiplier b
     output p[4]
   ) {
   
   sig n1[4], n2[3], n3[2], n4;
   full_adder fa[6];
-
   always {
+  
     n1[3:0] = a[3:0] & 4x{b[0]}; // input lvl 1
     n2[2:0] = a[2:0] & 3x{b[1]}; // input lvl 2
     fa.x[2:0] = n1[3:1];
