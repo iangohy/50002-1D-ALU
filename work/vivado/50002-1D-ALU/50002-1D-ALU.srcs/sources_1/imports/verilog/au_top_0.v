@@ -21,9 +21,22 @@ module au_top_0 (
   
   reg rst;
   
+  wire [1-1:0] M_compare_c;
+  reg [1-1:0] M_compare_z;
+  reg [1-1:0] M_compare_v;
+  reg [1-1:0] M_compare_n;
+  reg [3-1:0] M_compare_alufn;
+  compare_1 compare (
+    .z(M_compare_z),
+    .v(M_compare_v),
+    .n(M_compare_n),
+    .alufn(M_compare_alufn),
+    .c(M_compare_c)
+  );
+  
   wire [1-1:0] M_reset_cond_out;
   reg [1-1:0] M_reset_cond_in;
-  reset_conditioner_1 reset_cond (
+  reset_conditioner_2 reset_cond (
     .clk(clk),
     .in(M_reset_cond_in),
     .out(M_reset_cond_out)
@@ -37,5 +50,10 @@ module au_top_0 (
     io_led = 24'h000000;
     io_seg = 8'hff;
     io_sel = 4'hf;
+    M_compare_alufn[1+1-:2] = io_dip[0+0+1-:2];
+    M_compare_z = io_dip[0+2+0-:1];
+    M_compare_v = io_dip[0+3+0-:1];
+    M_compare_n = io_dip[0+4+0-:1];
+    io_led[0+0+0-:1] = M_compare_c;
   end
 endmodule
