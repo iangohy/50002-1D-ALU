@@ -1,4 +1,4 @@
-module sixteen_bit_multiplier (
+module multiplier (
     input a[16],  // input 16bit multiplicand a
     input b[16],  // input 16bit multiplier b
     output p[16]
