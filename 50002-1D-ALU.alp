@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="50002-1D-ALU" board="Alchitry Au" language="Lucid" version="3">
   <files>
-<<<<<<< Updated upstream
-    <component>reset_conditioner.luc</component>
-    <src top="true">au_top.luc</src>
-=======
     <src>boolean.luc</src>
     <src>full_adder.luc</src>
     <src>sixteen_bit_shiftleft.luc</src>
@@ -18,7 +14,6 @@
     <src>alu.luc</src>
     <src>add_sub.luc</src>
     <src>sixteen_bit_shiftright.luc</src>
->>>>>>> Stashed changes
     <constraint lib="true">alchitry.acf</constraint>
     <constraint lib="true">io.acf</constraint>
     <constraint lib="true">au.xdc</constraint>

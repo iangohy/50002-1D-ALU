@@ -1,0 +1,35 @@
+module boolean (
+    input a[16],  
+    input b[16],
+    input alufn[6],
+    output out[16]
+  ) {
+  
+  var i;
+
+  always {
+    out[15:0] = 0;
+    case(alufn[3:0]){
+      // This is the AND operation
+      4b1000:
+      for (i=0; i<16; i++){
+        out[i] =a[i] & b[i];
+        }
+      // This is the OR operation  
+      4b1110:
+      for (i=0; i<16; i++){
+        out[i] = a[i] | b[i];
+        }
+      // This is the XOR operation
+      4b0110:
+      for (i=0; i<16; i++){
+        out[i] = a[i] ^ b[i];
+        }
+      // This is the "A" operation  
+      4b1010:
+      for (i=0; i<16; i++){
+        out[i] = a[i];
+      }
+    }
+  }
+}
