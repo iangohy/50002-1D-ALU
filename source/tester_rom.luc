@@ -6,10 +6,12 @@ module tester_rom (
   ) {
 
   // Reverse left-right order from states!
-  // {SUB2,SUB1,ADD2,ADD1}
-  const TESTADDSUB = {60h80007FFF0100012,60hFFFFFFFF0100004,60hFFFF00020000012,60h800000010080011};
+  // {ADD2,ADD1}
+  const TESTADD = {60hFFFF00020000012,60h800000010080011};
+  // {SUB2,SUB1}
+  const TESTSUB = {60h80007FFF0100012,60hFFFFFFFF0100004};
   //
-  const TESTMUL = {};
+  const TESTMUL = {60hFFFF020002FE003,60h0000FFFF0200004};
   //
   const TESTBOOL = {};
   //
@@ -17,7 +19,7 @@ module tester_rom (
   //
   const TESTCOMP = {};
   // ROM address 0 not used (1 indexing for test cases)
-  const TESTS = c{TESTCOMP,TESTSHIFT,TESTBOOL,TESTMUL,TESTADDSUB,60h0};
+  const TESTS = c{TESTCOMP,TESTSHIFT,TESTBOOL,TESTMUL,TESTSUB,TESTADD,60h0};
   
   always {
     testcase = TESTS[address];

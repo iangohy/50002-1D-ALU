@@ -1,8 +1,9 @@
 module tester (
     input clk,  // clock
     input rst,  // reset
+    input force_error, // forcefully flips LSB of ALU output (s)
     output counter[5],
-    output error
+    output error[2]
   ) {
   
   fsm testerfsm(.clk(clk), .rst(rst)) = {INIT,ADD1,ADD2,SUB1,SUB2,END};
@@ -13,6 +14,7 @@ module tester (
   tester_rom testerrom;
   
   sig romdata[60];
+  sig processed_out[16];
 
   always {
     slowClockEdge.in = slowClock.value;
@@ -39,10 +41,19 @@ module tester (
         alu16.b = romdata[43:28];
         alu16.alufn = romdata[25:20];
         
-        if (alu16.out == romdata[19:4] && alu16.zvn == romdata[2:0]) {
-          error = 0;
+        processed_out = alu16.out;
+        if (force_error == b1) {
+          processed_out[0] = !processed_out[0]; 
+        }
+        
+        if (processed_out == romdata[19:4] && alu16.zvn == romdata[2:0]) {
+          error = 2b0;
+        } else if (processed_out != romdata[19:4]) {
+          error = 2b1;
+        } else if (alu16.zvn != romdata[2:0]) {
+          error = 2b10;
         } else {
-          error = 1;
+          error = 2b11;
         }
         
         if (slowClockEdge.out == b1) { //only trigger change when slowClockEdge gives a 1
@@ -58,10 +69,19 @@ module tester (
         alu16.b = romdata[43:28];
         alu16.alufn = romdata[25:20];
         
-        if (alu16.out == romdata[19:4] && alu16.zvn == romdata[2:0]) {
-          error = 0;
+        processed_out = alu16.out;
+        if (force_error == b1) {
+          processed_out[0] = !processed_out[0]; 
+        }
+        
+        if (processed_out == romdata[19:4] && alu16.zvn == romdata[2:0]) {
+          error = 2b0;
+        } else if (processed_out != romdata[19:4]) {
+          error = 2b1;
+        } else if (alu16.zvn != romdata[2:0]) {
+          error = 2b10;
         } else {
-          error = 1;
+          error = 2b11;
         }
         
         if (slowClockEdge.out == b1) { //only trigger change when slowClockEdge gives a 1
@@ -77,14 +97,23 @@ module tester (
         alu16.b = romdata[43:28];
         alu16.alufn = romdata[25:20];
         
-        if (alu16.out == romdata[19:4] && alu16.zvn == romdata[2:0]) {
-          error = 0;
+        processed_out = alu16.out;
+        if (force_error == b1) {
+          processed_out[0] = !processed_out[0]; 
+        }
+        
+        if (processed_out == romdata[19:4] && alu16.zvn == romdata[2:0]) {
+          error = 2b0;
+        } else if (processed_out != romdata[19:4]) {
+          error = 2b1;
+        } else if (alu16.zvn != romdata[2:0]) {
+          error = 2b10;
         } else {
-          error = 1;
+          error = 2b11;
         }
         
         if (slowClockEdge.out == b1) { //only trigger change when slowClockEdge gives a 1
-          testerfsm.d = testerfsm.SU2;
+          testerfsm.d = testerfsm.SUB2;
         }
         
       testerfsm.END:
