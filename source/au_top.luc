@@ -12,7 +12,9 @@ module au_top (
   ) {
   
   sig rst;                  // reset signal
-  boolean bool;
+  counter slowclock(#SIZE(1),#DIV(26), .clk(clk), .rst(rst));
+  seq_plus_one plus_one(.clk(slowclock.value),.rst(rst));
+  sixteen_bit_multiplier mult;
   
   .clk(clk) {
     // The reset conditioner is used to synchronize the reset signal to the FPGA
@@ -40,5 +42,13 @@ module au_top (
     io_led[2]=bool.out[15:8];
     io_led[1]=bool.out[7:0];
     */
+    
+    mult.a =plus_one.out;
+    mult.b[0]=b0;
+    mult.b[1]=b1;
+    mult.b[15:2]=15x{b0};
+    io_led[0]=mult.p[7:0];
+    io_led[1]=mult.p[15:8];
+    
   }
 }

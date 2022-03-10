@@ -1,0 +1,15 @@
+module seq_plus_one (
+    input clk,  // clock
+    input rst,  // reset
+    output out[16]
+  ) {
+  dff register_1[16](#INIT(0),.clk(clk),.rst(rst));
+  sixteen_fa rca;
+  always {
+    rca.x=16h01;
+    rca.y=register_1.q;
+    rca.cin=b0;
+    register_1.d=rca.s;
+    out=rca.s;
+  }
+}

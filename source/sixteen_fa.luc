@@ -1,0 +1,19 @@
+module sixteen_fa (
+    input x[16],
+    input y[16],
+    input cin,
+    output cout,
+    output s[16]
+  ) {
+  full_adder fa[16];
+
+  always {
+    fa.x=x;
+    fa.y=y;
+    fa.cin[0]=cin;
+    fa.cin[15:1]=fa.cout[14:0];
+    s = fa.s;
+    cout =fa.cout[15];
+    
+  }
+}
