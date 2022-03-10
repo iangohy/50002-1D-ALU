@@ -21,9 +21,26 @@ module au_top_0 (
   
   reg rst;
   
+  wire [16-1:0] M_adder_out;
+  wire [1-1:0] M_adder_z;
+  wire [1-1:0] M_adder_v;
+  wire [1-1:0] M_adder_n;
+  reg [16-1:0] M_adder_a;
+  reg [16-1:0] M_adder_b;
+  reg [1-1:0] M_adder_alufn;
+  add_sub_1 adder (
+    .a(M_adder_a),
+    .b(M_adder_b),
+    .alufn(M_adder_alufn),
+    .out(M_adder_out),
+    .z(M_adder_z),
+    .v(M_adder_v),
+    .n(M_adder_n)
+  );
+  
   wire [1-1:0] M_reset_cond_out;
   reg [1-1:0] M_reset_cond_in;
-  reset_conditioner_1 reset_cond (
+  reset_conditioner_2 reset_cond (
     .clk(clk),
     .in(M_reset_cond_in),
     .out(M_reset_cond_out)
@@ -37,5 +54,13 @@ module au_top_0 (
     io_led = 24'h000000;
     io_seg = 8'hff;
     io_sel = 4'hf;
+    M_adder_alufn = io_dip[0+0+0-:1];
+    M_adder_a = 16'h0000;
+    M_adder_b = 16'h0000;
+    io_led[16+7-:8] = M_adder_out[8+7-:8];
+    io_led[8+7-:8] = M_adder_out[0+7-:8];
+    io_led[0+0+0-:1] = M_adder_z;
+    io_led[0+1+0-:1] = M_adder_v;
+    io_led[0+2+0-:1] = M_adder_n;
   end
 endmodule

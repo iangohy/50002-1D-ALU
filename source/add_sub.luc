@@ -1,0 +1,48 @@
+module add_sub (
+    input a[16],
+    input b[16],
+    input alufn,
+    output out[16],
+    output z,
+    output v,
+    output n
+  ) {
+  full_adder fulladder[16];
+  
+  var s[16];
+  var cout;
+  var orz_8[8];
+  var orz_4[4];
+  var orz_2[2];
+  var orz_1;
+  var xor;
+  var and_1;
+  var and_2;
+  var and_3;
+  var and_4;
+
+  always {
+    fulladder.x = a;
+    fulladder.y = b^alufn;
+    fulladder.cin[0] = alufn;
+    fulladder.cin[15:1] = fulladder.cout[14:0];
+    out[15:0] = fulladder.s[15:0];
+    cout = fulladder.cout[15];
+    
+    orz_8 = s[7:0]^s[15:8];
+    orz_4 = orz_8[3:0]^orz_8[7:4];
+    orz_2 = orz_4[1:0]^orz_4[3:2];
+    orz_1 = orz_2[0]^orz_2[1];
+    z = ~orz_1;
+    out = s;
+    
+    xor = alufn ^ b[15];
+    and_1 = xor & a[15];
+    and_2 = and_1 & ~s[15];
+    and_3 = ~xor & ~a[15];
+    and_4 = and_3 & s[15];
+    v = and_2 | and_4;
+    
+    n = s[15];
+  }
+}
