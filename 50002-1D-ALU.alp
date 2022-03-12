@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="50002-1D-ALU" board="Alchitry Au" language="Lucid" version="3">
   <files>
-    <component>reset_conditioner.luc</component>
-    <src>sixteen_bit_shiftright.luc</src>
-    <src>add_sub.luc</src>
-    <src>boolean.luc</src>
-    <src>shifter.luc</src>
-    <src>full_adder.luc</src>
     <src>sixteen_bit_shiftleft.luc</src>
     <src>sixteen_bit_sra.luc</src>
     <src>compare.luc</src>
-    <src>multiplier.luc</src>
+    <src>mux_2.luc</src>
+    <src>mux_4.luc</src>
+    <src>add_sub.luc</src>
+    <src>boolean.luc</src>
+    <src>shifter.luc</src>
+    <src>tester.luc</src>
     <src>alu.luc</src>
     <src top="true">au_top.luc</src>
-    <src>tester.luc</src>
+    <src>sixteen_bit_shiftright.luc</src>
+    <component>reset_conditioner.luc</component>
+    <src>multiplier.luc</src>
+    <src>full_adder.luc</src>
     <constraint lib="true">alchitry.acf</constraint>
     <constraint lib="true">io.acf</constraint>
     <constraint lib="true">au.xdc</constraint>
