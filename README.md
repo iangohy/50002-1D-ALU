@@ -8,6 +8,7 @@
  - [Li Ling](https://github.com/Sprittoo)
  - [Michael Chun](https://github.com/mckp0)
  - [Joel Tay](https://github.com/Vemrthiss)
+ - [Nicholas Ho](https://github.com/hjh99)
 
 ## Collaborating
 Clone the repository using `git clone`:
