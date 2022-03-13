@@ -1,0 +1,72 @@
+module alu_control (
+    input clk,  // clock
+    input rst,  // reset
+    input buttonNext,
+    input inputMoreSig[8],
+    input inputLessSig[8],
+    output out[16] 
+  ) {
+  
+  fsm alufsm(.clk(clk), .rst(rst)) = {IDLE,SETA,SETB,SETALUFN,OUTPUT};
+  dff a_dff[16](.clk(clk), .rst(rst));
+  dff b_dff[16](.clk(clk), .rst(rst));
+  dff alufn_dff[6](.clk(clk), .rst(rst));
+  edge_detector goNextState(.clk(clk));
+  alu alu16;
+ 
+  
+  always {
+    a_dff.d = a_dff.q;
+    b_dff.d = b_dff.q;
+    alufn_dff.d = alufn_dff.q;
+    goNextState.in = buttonNext;
+    out = 0;
+    alu16.a = 0;
+    alu16.b = 0;
+    alu16.alufn = 0;
+    
+    case (alufsm.q) {
+      alufsm.IDLE:
+        a_dff.d = 0;
+        b_dff.d = 0;
+        alufn_dff.d = 0;
+        
+        if (goNextState.out == b1) {
+          alufsm.d = alufsm.SETA;
+        }
+        
+      alufsm.SETA:
+        a_dff.d[15:8] = inputMoreSig;
+        a_dff.d[7:0] = inputLessSig; 
+        
+        if (goNextState.out == b1) {
+          alufsm.d = alufsm.SETB; 
+        }
+        
+      alufsm.SETB:
+        b_dff.d[15:8] = inputMoreSig;
+        b_dff.d[7:0] = inputLessSig; 
+        
+        if (goNextState.out == b1) {
+          alufsm.d = alufsm.SETALUFN; 
+        }
+        
+      alufsm.SETALUFN:
+        alufn_dff.d = inputLessSig[5:0];
+        
+        if (goNextState.out == b1) {
+          alufsm.d = alufsm.OUTPUT; 
+        }
+        
+      alufsm.OUTPUT:
+        alu16.a = a_dff.q;
+        alu16.b = b_dff.q;
+        alu16.alufn = alufn_dff.q;
+        
+        out = alu16.out;
+        
+        if (goNextState.out == b1) {
+          alufsm.d = alufsm.SETA; 
+        }
+  }
+}
