@@ -35,6 +35,7 @@ module au_top (
     io_led[0] = alutester.counter;           // test case no. (boolean from 1)
     io_led[0][7:6] = alutester.error;        // io_led[1][0] ON = error in out, io_led[1][1] ON = error in zvn
     alutester.force_error = io_dip[0][0];    // force error by flipping LSB of alu out
+    alutester.pausing_counter_reset=io_dip[0][1];
     io_led[2] = alutester.debugSum[15:8];
     io_led[1] = alutester.debugSum[7:0];
     /*

@@ -4,7 +4,7 @@
    This is a temporary file and any changes made to it will be destroyed.
 */
 
-module multiplier_12 (
+module multiplier_14 (
     input [15:0] a,
     input [15:0] b,
     output reg [15:0] p
@@ -38,7 +38,7 @@ module multiplier_12 (
   genvar GEN_fa0;
   generate
   for (GEN_fa0=0;GEN_fa0<7'h78;GEN_fa0=GEN_fa0+1) begin: fa_gen_0
-    full_adder_15 fa (
+    full_adder_16 fa (
       .x(M_fa_x[GEN_fa0*(1)+(1)-1-:(1)]),
       .y(M_fa_y[GEN_fa0*(1)+(1)-1-:(1)]),
       .cin(M_fa_cin[GEN_fa0*(1)+(1)-1-:(1)]),

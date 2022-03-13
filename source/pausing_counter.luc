@@ -1,0 +1,26 @@
+module pausing_counter (
+    input clk,  // clock
+    input rst,  // reset
+    input b,
+    input sel[5],
+    output outp[5]
+  ) {
+  dff register[5](#INIT(-1),.clk(clk),.rst(rst));
+  rca_five rca;
+  mux_2 mux[5];
+  sig rcaout[5];
+  var i;
+  
+  always {
+    rca.b = 5b00001;
+    rca.a = register.q;
+    rcaout = rca.out;
+    outp = rcaout;
+    for(i=0;i<5;i++){
+      mux.a[i]=rcaout[i];
+      mux.b[i]=b[i];
+      mux.s[i]=sel[i];
+      register.d[i]=mux.out[i];
+    }
+  }
+}

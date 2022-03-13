@@ -4,47 +4,26 @@
    This is a temporary file and any changes made to it will be destroyed.
 */
 
-module mux_4_14 (
-    input [1:0] s,
+module mux_2_9 (
+    input s,
     input a,
     input b,
-    input c,
-    input d,
     output reg out
   );
   
   
   
-  reg x;
-  
-  reg y;
-  
   always @* begin
     
-    case (s[0+0-:1])
+    case (s)
       1'h0: begin
-        x = a;
-        y = c;
+        out = a;
       end
       1'h1: begin
-        x = b;
-        y = d;
+        out = b;
       end
       default: begin
-        x = a;
-        y = c;
-      end
-    endcase
-    
-    case (s[1+0-:1])
-      1'h0: begin
-        out = x;
-      end
-      1'h1: begin
-        out = y;
-      end
-      default: begin
-        out = x;
+        out = a;
       end
     endcase
   end
