@@ -1,10 +1,10 @@
 module mux_4 (
     input s[2], // selector signals
-    input a,
-    input b,
-    input c,
-    input d,
-    output out
+    input a[16],
+    input b[16],
+    input c[16],
+    input d[16],
+    output out[16]
   ) {
 
   always {
