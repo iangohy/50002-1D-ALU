@@ -4,7 +4,7 @@
    This is a temporary file and any changes made to it will be destroyed.
 */
 
-module shifter_11 (
+module shifter_13 (
     input [15:0] a,
     input [3:0] b,
     input [1:0] alufn,
@@ -16,7 +16,7 @@ module shifter_11 (
   wire [16-1:0] M_shl16_s;
   reg [16-1:0] M_shl16_a;
   reg [4-1:0] M_shl16_b;
-  sixteen_bit_shiftleft_16 shl16 (
+  sixteen_bit_shiftleft_17 shl16 (
     .a(M_shl16_a),
     .b(M_shl16_b),
     .s(M_shl16_s)
@@ -25,7 +25,7 @@ module shifter_11 (
   wire [16-1:0] M_shr16_s;
   reg [16-1:0] M_shr16_a;
   reg [4-1:0] M_shr16_b;
-  sixteen_bit_shiftright_17 shr16 (
+  sixteen_bit_shiftright_18 shr16 (
     .a(M_shr16_a),
     .b(M_shr16_b),
     .s(M_shr16_s)
@@ -34,7 +34,7 @@ module shifter_11 (
   wire [16-1:0] M_sra16_s;
   reg [16-1:0] M_sra16_a;
   reg [4-1:0] M_sra16_b;
-  sixteen_bit_sra_18 sra16 (
+  sixteen_bit_sra_19 sra16 (
     .a(M_sra16_a),
     .b(M_sra16_b),
     .s(M_sra16_s)

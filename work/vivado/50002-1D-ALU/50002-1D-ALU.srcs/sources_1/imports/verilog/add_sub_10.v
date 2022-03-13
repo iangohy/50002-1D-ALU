@@ -4,7 +4,7 @@
    This is a temporary file and any changes made to it will be destroyed.
 */
 
-module add_sub_8 (
+module add_sub_10 (
     input [15:0] a,
     input [15:0] b,
     input alufn,
@@ -25,7 +25,7 @@ module add_sub_8 (
   genvar GEN_fulladder0;
   generate
   for (GEN_fulladder0=0;GEN_fulladder0<5'h10;GEN_fulladder0=GEN_fulladder0+1) begin: fulladder_gen_0
-    full_adder_15 fulladder (
+    full_adder_16 fulladder (
       .x(M_fulladder_x[GEN_fulladder0*(1)+(1)-1-:(1)]),
       .y(M_fulladder_y[GEN_fulladder0*(1)+(1)-1-:(1)]),
       .cin(M_fulladder_cin[GEN_fulladder0*(1)+(1)-1-:(1)]),

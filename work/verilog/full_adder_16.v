@@ -4,7 +4,7 @@
    This is a temporary file and any changes made to it will be destroyed.
 */
 
-module full_adder_15 (
+module full_adder_16 (
     input x,
     input y,
     input cin,
