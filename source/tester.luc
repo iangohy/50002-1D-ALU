@@ -3,8 +3,7 @@ module tester (
     input rst,  // reset
     input force_error, // forcefully flips LSB of ALU output (s)
     output counter[5],
-    output error[2],
-    output debugSum[8]
+    output error[2]
   ) {
   
   fsm testerfsm(.clk(clk), .rst(rst)) = {
@@ -31,7 +30,6 @@ module tester (
     alu16.a = 0;
     alu16.b = 0;
     alu16.alufn = 0;
-    debugSum = alu16.out[7:0];
     
     case(testerfsm.q) {  
       testerfsm.INIT:
