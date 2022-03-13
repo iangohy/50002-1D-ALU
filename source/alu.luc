@@ -11,7 +11,7 @@ module alu (
   shifter shift16;
   multiplier mult16;
   mux_2 mux2[16];
-  mux_4 mux4[16];
+  mux_4 mux4;
   
   sig s[16];
   sig cmp[16];
@@ -42,7 +42,7 @@ module alu (
     // bool16
     bool16.a = a;
     bool16.b = b;
-    bool16.alufn = alufn;
+    bool16.alufn = alufn[3:0];
     boole = bool16.out;
     
     // shift16
@@ -62,12 +62,12 @@ module alu (
     mux2.b = mult;
     miniMuxRes = mux2.out;
     
-    mux4.s[0] = 16x{alufn[5]};
-    mux4.s[1] = 16x{alufn[4]};
+    mux4.s = alufn[5:4];
     mux4.a = miniMuxRes;
     mux4.b = shift;
     mux4.c = boole;
     mux4.d = cmp;
     out = mux4.out;
+
   }
 }
