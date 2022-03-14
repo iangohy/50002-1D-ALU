@@ -4,14 +4,15 @@ module alu_control (
     input buttonNext,
     input inputMoreSig[8],
     input inputLessSig[8],
-    output out[16] 
+    output out[16],
+    output state[3]
   ) {
   
   fsm alufsm(.clk(clk), .rst(rst)) = {IDLE,SETA,SETB,SETALUFN,OUTPUT};
   dff a_dff[16](.clk(clk), .rst(rst));
   dff b_dff[16](.clk(clk), .rst(rst));
   dff alufn_dff[6](.clk(clk), .rst(rst));
-  edge_detector goNextState(.clk(clk));
+  edge_detector goNextState(.clk(clk), #RISE(1),#FALL(0));
   alu alu16;
  
   
@@ -20,17 +21,17 @@ module alu_control (
     b_dff.d = b_dff.q;
     alufn_dff.d = alufn_dff.q;
     goNextState.in = buttonNext;
-    out = 0;
-    alu16.a = 0;
-    alu16.b = 0;
-    alu16.alufn = 0;
-    
+    out = 16x{b0};
+    alu16.a = 16x{b0};
+    alu16.b = 16x{b0};
+    alu16.alufn = 5x{b0};
+    state = 3b000;
     case (alufsm.q) {
       alufsm.IDLE:
         a_dff.d = 0;
         b_dff.d = 0;
         alufn_dff.d = 0;
-        
+        state = 3b000;
         if (goNextState.out == b1) {
           alufsm.d = alufsm.SETA;
         }
@@ -38,7 +39,7 @@ module alu_control (
       alufsm.SETA:
         a_dff.d[15:8] = inputMoreSig;
         a_dff.d[7:0] = inputLessSig; 
-        
+        state = 3b001;
         if (goNextState.out == b1) {
           alufsm.d = alufsm.SETB; 
         }
@@ -46,14 +47,14 @@ module alu_control (
       alufsm.SETB:
         b_dff.d[15:8] = inputMoreSig;
         b_dff.d[7:0] = inputLessSig; 
-        
+        state = 3b010;
         if (goNextState.out == b1) {
           alufsm.d = alufsm.SETALUFN; 
         }
         
       alufsm.SETALUFN:
         alufn_dff.d = inputLessSig[5:0];
-        
+        state = 3b011;
         if (goNextState.out == b1) {
           alufsm.d = alufsm.OUTPUT; 
         }
@@ -62,7 +63,7 @@ module alu_control (
         alu16.a = a_dff.q;
         alu16.b = b_dff.q;
         alu16.alufn = alufn_dff.q;
-        
+        state = 3b100;
         out = alu16.out;
         
         if (goNextState.out == b1) {
