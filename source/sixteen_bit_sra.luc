@@ -1,11 +1,11 @@
 module sixteen_bit_sra (
-    input a[16], //input 16bit signal
-    input b[4], //selector
+    input a[16], // input 16bit signal
+    input b[4], // selector
     output s[16]
   ) {
   sig w[16],x[16],y[16];  
   always {
-    case (b[3]){ //shift right 8 bits
+    case (b[3]){ // shift right 8 bits
       b0:
         w=a;
         
@@ -16,7 +16,7 @@ module sixteen_bit_sra (
       default:
         w=a;
     }   
-     case (b[2]){ //4 bit shifter
+     case (b[2]){ // 4 bit shifter
       b0:
       x=w;
             
@@ -27,7 +27,7 @@ module sixteen_bit_sra (
       default:
       x=w;
     }    
-     case (b[1]){//2bit shifter
+     case (b[1]){// 2 bit shifter
       b0:
       y=x;
       b1:
@@ -36,7 +36,7 @@ module sixteen_bit_sra (
       default:
       y=x;
     }
-     case (b[0]){//1bit shifter
+     case (b[0]){// 1 bit shifter
       b0:
       s=y;
         

@@ -5,6 +5,7 @@ module pausing_counter (
     input sel[5],
     output outp[5]
   ) {
+  
   dff register[5](#INIT(-1),.clk(clk),.rst(rst));
   rca_five rca;
   mux_2 mux[5];

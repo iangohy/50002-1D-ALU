@@ -5,6 +5,7 @@ module alu (
     output out[16],
     output zvn[3]
   ) {
+  
   add_sub adder16;
   compare compare16;
   boolean bool16;
@@ -68,6 +69,5 @@ module alu (
     mux4.c = boole;
     mux4.d = cmp;
     out = mux4.out;
-
   }
 }

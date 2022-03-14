@@ -13,15 +13,15 @@ module boolean (
       mulselector = b[i]*2 + a[i];
     case (mulselector){
       b00:
-      out[i] = alufn[0];
+        out[i] = alufn[0];
       b01:
-      out[i] = alufn[1];
+        out[i] = alufn[1];
       b10:
-      out[i] = alufn[2]; 
+        out[i] = alufn[2]; 
       b11:
-      out[i]= alufn[3]; 
+        out[i]= alufn[3]; 
       default:
-      out[i]=alufn[0];
+        out[i] = alufn[0];
       }
     }
   }

@@ -3,7 +3,9 @@ module rca_five (
     input b[5],
     output out[5]
   ) {
+  
   full_adder fa[5];
+  
   always {
     fa.x=a;
     fa.y = b;

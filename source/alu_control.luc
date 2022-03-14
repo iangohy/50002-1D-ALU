@@ -13,7 +13,7 @@ module alu_control (
   dff a_dff[16](.clk(clk), .rst(rst));
   dff b_dff[16](.clk(clk), .rst(rst));
   dff alufn_dff[6](.clk(clk), .rst(rst));
-  edge_detector goNextState(.clk(clk), #RISE(1),#FALL(0));
+  edge_detector goNextState(.clk(clk), #RISE(1),#FALL(0));  // RISING edge detector
   alu alu16;
  
   

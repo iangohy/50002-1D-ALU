@@ -7,9 +7,9 @@ module add_sub (
     output v,
     output n
   ) {
+  
   full_adder fulladder[16];
-  
-  
+    
   sig cout;
   sig orz_8[8];
   sig orz_4[4];
@@ -22,19 +22,22 @@ module add_sub (
   sig and_4;
 
   always {
+    // cout
     fulladder.x = a;
-    fulladder.y = b^16x{alufn};
-    fulladder.cin[0] = alufn;
-    fulladder.cin[15:1] = fulladder.cout[14:0];
-    out[15:0] = fulladder.s[15:0];
+    fulladder.y = b^16x{alufn};  // XOR y with ALUFN (twos complement)
+    fulladder.cin[0] = alufn;    // ALUFN is the carry in
+    fulladder.cin[15:1] = fulladder.cout[14:0];  // cin of next bit from previous RCA bit out
+    out[15:0] = fulladder.s[15:0];  // set add_sub output to full_adder output
     cout = fulladder.cout[15];
     
+    // z signal (invert OR of all output bits)
     orz_8 = fulladder.s[7:0]|fulladder.s[15:8];
     orz_4 = orz_8[3:0]|orz_8[7:4];
     orz_2 = orz_4[1:0]|orz_4[3:2];
     orz_1 = orz_2[0]|orz_2[1];
     z = ~orz_1;
     
+    // v signal    
     xor1 = alufn ^ b[15];
     and_1 = xor1 & a[15];
     and_2 = and_1 & ~fulladder.s[15];
@@ -42,6 +45,7 @@ module add_sub (
     and_4 = and_3 & fulladder.s[15];
     v = and_2 | and_4;
     
+    // n signal
     n = fulladder.s[15];
   }
 }
