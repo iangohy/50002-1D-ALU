@@ -38,7 +38,8 @@ module au_top (
     controller.buttonNext = io_button[0]; // Button to advance to next state
     io_led[2] = controller.out[15:8];
     io_led[1] = controller.out[7:0];
-    io_led[0][2:0]=controller.state;
+    io_led[0][2:0] = controller.state;
+    io_led[0][7:5] = controller.zvn;
     /*
     io_led[0] = alutester.counter;           // test case no. (boolean from 1)
     io_led[0][7:6] = alutester.error;        // io_led[1][0] ON = error in out, io_led[1][1] ON = error in zvn
