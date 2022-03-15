@@ -21,15 +21,23 @@ module au_top_0 (
   
   reg rst;
   
-  wire [5-1:0] M_alutester_counter;
-  wire [2-1:0] M_alutester_error;
-  reg [1-1:0] M_alutester_force_error;
-  tester_1 alutester (
+  wire [16-1:0] M_controller_out;
+  wire [8-1:0] M_controller_misc_states;
+  reg [1-1:0] M_controller_buttonNext;
+  reg [8-1:0] M_controller_inputMoreSig;
+  reg [8-1:0] M_controller_inputLessSig;
+  reg [1-1:0] M_controller_force_error;
+  reg [1-1:0] M_controller_reset_counter;
+  automanual_1 controller (
     .clk(clk),
     .rst(rst),
-    .force_error(M_alutester_force_error),
-    .counter(M_alutester_counter),
-    .error(M_alutester_error)
+    .buttonNext(M_controller_buttonNext),
+    .inputMoreSig(M_controller_inputMoreSig),
+    .inputLessSig(M_controller_inputLessSig),
+    .force_error(M_controller_force_error),
+    .reset_counter(M_controller_reset_counter),
+    .out(M_controller_out),
+    .misc_states(M_controller_misc_states)
   );
   
   wire [1-1:0] M_reset_cond_out;
@@ -48,8 +56,13 @@ module au_top_0 (
     io_led = 24'h000000;
     io_seg = 8'hff;
     io_sel = 4'hf;
-    io_led[0+7-:8] = M_alutester_counter;
-    io_led[8+0+1-:2] = M_alutester_error;
-    M_alutester_force_error = io_dip[0+0+0-:1];
+    M_controller_inputLessSig = io_dip[8+7-:8];
+    M_controller_inputMoreSig = io_dip[16+7-:8];
+    M_controller_reset_counter = io_dip[0+1+0-:1];
+    M_controller_buttonNext = io_button[0+0-:1];
+    M_controller_force_error = io_dip[0+0+0-:1];
+    io_led[16+7-:8] = M_controller_out[8+7-:8];
+    io_led[8+7-:8] = M_controller_out[0+7-:8];
+    io_led[0+7-:8] = M_controller_misc_states;
   end
 endmodule

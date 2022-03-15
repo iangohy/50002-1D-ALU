@@ -84,24 +84,28 @@ set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
 read_verilog -library xil_defaultlib {
-  /home/ian/Documents/50002-1D-ALU/work/vivado/50002-1D-ALU/50002-1D-ALU.srcs/sources_1/imports/verilog/add_sub_8.v
-  /home/ian/Documents/50002-1D-ALU/work/vivado/50002-1D-ALU/50002-1D-ALU.srcs/sources_1/imports/verilog/alu_6.v
-  /home/ian/Documents/50002-1D-ALU/work/vivado/50002-1D-ALU/50002-1D-ALU.srcs/sources_1/imports/verilog/boolean_10.v
-  /home/ian/Documents/50002-1D-ALU/work/vivado/50002-1D-ALU/50002-1D-ALU.srcs/sources_1/imports/verilog/compare_9.v
-  /home/ian/Documents/50002-1D-ALU/work/vivado/50002-1D-ALU/50002-1D-ALU.srcs/sources_1/imports/verilog/counter_3.v
-  /home/ian/Documents/50002-1D-ALU/work/vivado/50002-1D-ALU/50002-1D-ALU.srcs/sources_1/imports/verilog/counter_4.v
-  /home/ian/Documents/50002-1D-ALU/work/vivado/50002-1D-ALU/50002-1D-ALU.srcs/sources_1/imports/verilog/edge_detector_5.v
-  /home/ian/Documents/50002-1D-ALU/work/vivado/50002-1D-ALU/50002-1D-ALU.srcs/sources_1/imports/verilog/full_adder_15.v
-  /home/ian/Documents/50002-1D-ALU/work/vivado/50002-1D-ALU/50002-1D-ALU.srcs/sources_1/imports/verilog/multiplier_12.v
-  /home/ian/Documents/50002-1D-ALU/work/vivado/50002-1D-ALU/50002-1D-ALU.srcs/sources_1/imports/verilog/mux_2_13.v
-  /home/ian/Documents/50002-1D-ALU/work/vivado/50002-1D-ALU/50002-1D-ALU.srcs/sources_1/imports/verilog/mux_4_14.v
+  /home/ian/Documents/50002-1D-ALU/work/vivado/50002-1D-ALU/50002-1D-ALU.srcs/sources_1/imports/verilog/add_sub_12.v
+  /home/ian/Documents/50002-1D-ALU/work/vivado/50002-1D-ALU/50002-1D-ALU.srcs/sources_1/imports/verilog/alu_7.v
+  /home/ian/Documents/50002-1D-ALU/work/vivado/50002-1D-ALU/50002-1D-ALU.srcs/sources_1/imports/verilog/alu_control_3.v
+  /home/ian/Documents/50002-1D-ALU/work/vivado/50002-1D-ALU/50002-1D-ALU.srcs/sources_1/imports/verilog/automanual_1.v
+  /home/ian/Documents/50002-1D-ALU/work/vivado/50002-1D-ALU/50002-1D-ALU.srcs/sources_1/imports/verilog/boolean_14.v
+  /home/ian/Documents/50002-1D-ALU/work/vivado/50002-1D-ALU/50002-1D-ALU.srcs/sources_1/imports/verilog/compare_13.v
+  /home/ian/Documents/50002-1D-ALU/work/vivado/50002-1D-ALU/50002-1D-ALU.srcs/sources_1/imports/verilog/counter_8.v
+  /home/ian/Documents/50002-1D-ALU/work/vivado/50002-1D-ALU/50002-1D-ALU.srcs/sources_1/imports/verilog/edge_detector_10.v
+  /home/ian/Documents/50002-1D-ALU/work/vivado/50002-1D-ALU/50002-1D-ALU.srcs/sources_1/imports/verilog/edge_detector_6.v
+  /home/ian/Documents/50002-1D-ALU/work/vivado/50002-1D-ALU/50002-1D-ALU.srcs/sources_1/imports/verilog/full_adder_19.v
+  /home/ian/Documents/50002-1D-ALU/work/vivado/50002-1D-ALU/50002-1D-ALU.srcs/sources_1/imports/verilog/multiplier_16.v
+  /home/ian/Documents/50002-1D-ALU/work/vivado/50002-1D-ALU/50002-1D-ALU.srcs/sources_1/imports/verilog/mux_2_5.v
+  /home/ian/Documents/50002-1D-ALU/work/vivado/50002-1D-ALU/50002-1D-ALU.srcs/sources_1/imports/verilog/mux_4_17.v
+  /home/ian/Documents/50002-1D-ALU/work/vivado/50002-1D-ALU/50002-1D-ALU.srcs/sources_1/imports/verilog/pausing_counter_9.v
+  /home/ian/Documents/50002-1D-ALU/work/vivado/50002-1D-ALU/50002-1D-ALU.srcs/sources_1/imports/verilog/rca_five_18.v
   /home/ian/Documents/50002-1D-ALU/work/vivado/50002-1D-ALU/50002-1D-ALU.srcs/sources_1/imports/verilog/reset_conditioner_2.v
-  /home/ian/Documents/50002-1D-ALU/work/vivado/50002-1D-ALU/50002-1D-ALU.srcs/sources_1/imports/verilog/shifter_11.v
-  /home/ian/Documents/50002-1D-ALU/work/vivado/50002-1D-ALU/50002-1D-ALU.srcs/sources_1/imports/verilog/sixteen_bit_shiftleft_16.v
-  /home/ian/Documents/50002-1D-ALU/work/vivado/50002-1D-ALU/50002-1D-ALU.srcs/sources_1/imports/verilog/sixteen_bit_shiftright_17.v
-  /home/ian/Documents/50002-1D-ALU/work/vivado/50002-1D-ALU/50002-1D-ALU.srcs/sources_1/imports/verilog/sixteen_bit_sra_18.v
-  /home/ian/Documents/50002-1D-ALU/work/vivado/50002-1D-ALU/50002-1D-ALU.srcs/sources_1/imports/verilog/tester_1.v
-  /home/ian/Documents/50002-1D-ALU/work/vivado/50002-1D-ALU/50002-1D-ALU.srcs/sources_1/imports/verilog/tester_rom_7.v
+  /home/ian/Documents/50002-1D-ALU/work/vivado/50002-1D-ALU/50002-1D-ALU.srcs/sources_1/imports/verilog/shifter_15.v
+  /home/ian/Documents/50002-1D-ALU/work/vivado/50002-1D-ALU/50002-1D-ALU.srcs/sources_1/imports/verilog/sixteen_bit_shiftleft_20.v
+  /home/ian/Documents/50002-1D-ALU/work/vivado/50002-1D-ALU/50002-1D-ALU.srcs/sources_1/imports/verilog/sixteen_bit_shiftright_21.v
+  /home/ian/Documents/50002-1D-ALU/work/vivado/50002-1D-ALU/50002-1D-ALU.srcs/sources_1/imports/verilog/sixteen_bit_sra_22.v
+  /home/ian/Documents/50002-1D-ALU/work/vivado/50002-1D-ALU/50002-1D-ALU.srcs/sources_1/imports/verilog/tester_4.v
+  /home/ian/Documents/50002-1D-ALU/work/vivado/50002-1D-ALU/50002-1D-ALU.srcs/sources_1/imports/verilog/tester_rom_11.v
   /home/ian/Documents/50002-1D-ALU/work/vivado/50002-1D-ALU/50002-1D-ALU.srcs/sources_1/imports/verilog/au_top_0.v
 }
 OPTRACE "Adding files" END { }
