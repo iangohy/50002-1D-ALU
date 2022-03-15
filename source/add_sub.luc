@@ -2,6 +2,7 @@ module add_sub (
     input a[16],
     input b[16],
     input alufn,
+    input alufn6,
     output out[16],
     output z,
     output v,
@@ -9,7 +10,8 @@ module add_sub (
   ) {
   full_adder fulladder[16];
   
-  
+  mux_2 incrementer[16]; // to enable incrementer/decrementer
+  sig bout[16];
   sig cout;
   sig orz_8[8];
   sig orz_4[4];
@@ -20,10 +22,18 @@ module add_sub (
   sig and_2;
   sig and_3;
   sig and_4;
-
+  sig bin[16];
+  var i;
   always {
     fulladder.x = a;
-    fulladder.y = b^16x{alufn};
+    bin = 16b1;
+    for(i =0; i < 16; i++){
+      incrementer.a[i] = b[i];
+      incrementer.b[i] = bin[i];
+      incrementer.s[i] = alufn6;
+      bout[i] = incrementer.out[i];
+    }
+    fulladder.y = bout^16x{alufn};
     fulladder.cin[0] = alufn;
     fulladder.cin[15:1] = fulladder.cout[14:0];
     out[15:0] = fulladder.s[15:0];

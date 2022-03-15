@@ -41,73 +41,7 @@ module au_top (
     io_led[1] = controller.out[7:0];
     io_led[0] = controller.misc_states;
     
-    /*
-    controller.inputLessSig = io_dip[1];  // Less significant 8 bits
-    controller.inputMoreSig = io_dip[2];  // More significant 8 bits
-    controller.buttonNext = io_button[0]; // Button to advance to next state
-    io_led[2] = controller.out[15:8];
-    io_led[1] = controller.out[7:0];
-    io_led[0][2:0] = controller.state;
-    io_led[0][7:5] = controller.zvn;
-    /*
-    io_led[0] = alutester.counter;           // test case no. (boolean from 1)
-    io_led[0][7:6] = alutester.error;        // io_led[1][0] ON = error in out, io_led[1][1] ON = error in zvn
-    alutester.force_error = io_dip[0][0];    // force error by flipping LSB of alu out
-    alutester.pausing_counter_reset=io_dip[0][1];
-    io_led[2] = alutester.debugSum[15:8];
-    io_led[1] = alutester.debugSum[7:0];
-    */
-    /*
-    alu.alufn=io_dip[0][5:0];
-    alu.a=16x{b1};
-    alu.b[15:8] = io_dip[2];
-    alu.b[7:0] = io_dip[1];
-    io_led[2]=alu.out[15:8];
-    io_led[1]=alu.out[7:0];
-    io_led[0][3:0]=alu.zvn;
-    */
   }
 }
 
-////////////DEBUG BOOLEAN///////////////////
-/*
-    bool.alufn[3:0]=io_dip[0][3:0];
-    bool.a=16x{b0};
-    bool.b=16x{b0};    
-    io_led[2]=bool.out[15:8];
-    io_led[1]=bool.out[7:0];
-*/
-////////////END BOOLEAN///////////////////
 
-///////////DEBUG ADDER//////////////////////
-/*
-   adder.alufn=io_dip[0][0];
-   adder.a=16x{b0};
-   adder.b=16x{b0};
-   io_led[2]=adder.out[15:8];
-   io_led[1]=adder.out[7:0];
-   io_led[0][0]=adder.z;
-   io_led[0][1]=adder.v;
-   io_led[0][2]=adder.n;
-*/
-///////////END ADDER//////////////////////
-
-///////////DEBUG COMPARE//////////////////////
-/*
-   compare.alufn[2:1]=io_dip[0][1:0];
-   compare.z= io_dip[0][2];
-   compare.v=io_dip[0][3];
-   compare.n=io_dip[0][4];
-   io_led[0][0]=compare.c;
-
-*/
-///////////END COMPARE//////////////////////
-
-///////////DEBUG MULTIPLIER//////////////////////
-/*
-   multiplier.a=16x{b0};
-   multiplier.b=16x{b0};
-   io_led[2]=multiplier.out[15:8];
-   io_led[1]=multiplier.out[7:0];
-*/
-///////////END MULTIPLIER//////////////////////

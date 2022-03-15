@@ -12,7 +12,8 @@ module tester (
     INIT,ADD1,ADD2,SUB1,SUB2,
     MUL1,MUL2,AND,OR,XOR,A,
     SHL1,SHL2,SHR1,SHR2,SRA1,
-    CMPEQ,CMPLT,CMPLE,END};
+    CMPEQ,CMPLT,CMPLE,INC1,INC2,
+    DEC,NAND,NOR,XNOR,B,END};
   counter slowClock(#SIZE(1), #DIV(26), .clk(clk), .rst(rst));
   //counter slowCounter(#SIZE(5), #DIV(26), .clk(clk), .rst(rst));
   pausing_counter fsmcounter(.clk(slowClock.value),.rst(rst));
@@ -36,6 +37,7 @@ module tester (
     alu16.a = 0;
     alu16.b = 0;
     alu16.alufn = 0;
+    alu16.alufn_6=b0;
     debugSum = alu16.out[15:0];
     if(fsmcounter.outp==5b00000)
       testerfsm.d=testerfsm.INIT;
@@ -53,7 +55,7 @@ module tester (
         alu16.a = romdata[59:44];
         alu16.b = romdata[43:28];
         alu16.alufn = romdata[25:20];
-        
+        alu16.alufn_6 = b0;
         processed_out = alu16.out;
         if (force_error == b1) {
           processed_out[0] = !processed_out[0]; 
@@ -81,7 +83,7 @@ module tester (
         alu16.a = romdata[59:44];
         alu16.b = romdata[43:28];
         alu16.alufn = romdata[25:20];
-        
+        alu16.alufn_6 = b0;
         processed_out = alu16.out;
         if (force_error == b1) {
           processed_out[0] = !processed_out[0]; 
@@ -109,7 +111,7 @@ module tester (
         alu16.a = romdata[59:44];
         alu16.b = romdata[43:28];
         alu16.alufn = romdata[25:20];
-        
+        alu16.alufn_6 = b0;
         processed_out = alu16.out;
         if (force_error == b1) {
           processed_out[0] = !processed_out[0]; 
@@ -137,7 +139,7 @@ module tester (
         alu16.a = romdata[59:44];
         alu16.b = romdata[43:28];
         alu16.alufn = romdata[25:20];
-        
+        alu16.alufn_6 = b0;
         processed_out = alu16.out;
         if (force_error == b1) {
           processed_out[0] = !processed_out[0]; 
@@ -165,7 +167,7 @@ module tester (
         alu16.a = romdata[59:44];
         alu16.b = romdata[43:28];
         alu16.alufn = romdata[25:20];
-        
+        alu16.alufn_6 = b0;
         processed_out = alu16.out;
         if (force_error == b1) {
           processed_out[0] = !processed_out[0]; 
@@ -193,7 +195,7 @@ module tester (
         alu16.a = romdata[59:44];
         alu16.b = romdata[43:28];
         alu16.alufn = romdata[25:20];
-        
+        alu16.alufn_6 = b0;
         processed_out = alu16.out;
         if (force_error == b1) {
           processed_out[0] = !processed_out[0]; 
@@ -221,7 +223,7 @@ module tester (
         alu16.a = romdata[59:44];
         alu16.b = romdata[43:28];
         alu16.alufn = romdata[25:20];
-        
+        alu16.alufn_6 = b0;
         processed_out = alu16.out;
         if (force_error == b1) {
           processed_out[0] = !processed_out[0]; 
@@ -249,7 +251,7 @@ module tester (
         alu16.a = romdata[59:44];
         alu16.b = romdata[43:28];
         alu16.alufn = romdata[25:20];
-        
+        alu16.alufn_6 = b0;
         processed_out = alu16.out;
         if (force_error == b1) {
           processed_out[0] = !processed_out[0]; 
@@ -277,7 +279,7 @@ module tester (
         alu16.a = romdata[59:44];
         alu16.b = romdata[43:28];
         alu16.alufn = romdata[25:20];
-        
+        alu16.alufn_6 = b0;
         processed_out = alu16.out;
         if (force_error == b1) {
           processed_out[0] = !processed_out[0]; 
@@ -305,7 +307,7 @@ module tester (
         alu16.a = romdata[59:44];
         alu16.b = romdata[43:28];
         alu16.alufn = romdata[25:20];
-        
+        alu16.alufn_6 = b0;
         processed_out = alu16.out;
         if (force_error == b1) {
           processed_out[0] = !processed_out[0]; 
@@ -333,7 +335,7 @@ module tester (
         alu16.a = romdata[59:44];
         alu16.b = romdata[43:28];
         alu16.alufn = romdata[25:20];
-        
+        alu16.alufn_6 = b0;
         processed_out = alu16.out;
         if (force_error == b1) {
           processed_out[0] = !processed_out[0]; 
@@ -361,7 +363,7 @@ module tester (
         alu16.a = romdata[59:44];
         alu16.b = romdata[43:28];
         alu16.alufn = romdata[25:20];
-        
+        alu16.alufn_6 = b0;
         processed_out = alu16.out;
         if (force_error == b1) {
           processed_out[0] = !processed_out[0]; 
@@ -389,7 +391,7 @@ module tester (
         alu16.a = romdata[59:44];
         alu16.b = romdata[43:28];
         alu16.alufn = romdata[25:20];
-        
+        alu16.alufn_6 = b0;
         processed_out = alu16.out;
         if (force_error == b1) {
           processed_out[0] = !processed_out[0]; 
@@ -417,7 +419,7 @@ module tester (
         alu16.a = romdata[59:44];
         alu16.b = romdata[43:28];
         alu16.alufn = romdata[25:20];
-        
+        alu16.alufn_6 = b0;
         processed_out = alu16.out;
         if (force_error == b1) {
           processed_out[0] = !processed_out[0]; 
@@ -445,7 +447,7 @@ module tester (
         alu16.a = romdata[59:44];
         alu16.b = romdata[43:28];
         alu16.alufn = romdata[25:20];
-        
+        alu16.alufn_6 = b0;
         processed_out = alu16.out;
         if (force_error == b1) {
           processed_out[0] = !processed_out[0]; 
@@ -473,7 +475,7 @@ module tester (
         alu16.a = romdata[59:44];
         alu16.b = romdata[43:28];
         alu16.alufn = romdata[25:20];
-        
+        alu16.alufn_6 = b0;
         processed_out = alu16.out;
         if (force_error == b1) {
           processed_out[0] = !processed_out[0]; 
@@ -501,7 +503,7 @@ module tester (
         alu16.a = romdata[59:44];
         alu16.b = romdata[43:28];
         alu16.alufn = romdata[25:20];
-        
+        alu16.alufn_6 = b0;
         processed_out = alu16.out;
         if (force_error == b1) {
           processed_out[0] = !processed_out[0]; 
@@ -529,7 +531,199 @@ module tester (
         alu16.a = romdata[59:44];
         alu16.b = romdata[43:28];
         alu16.alufn = romdata[25:20];
+        alu16.alufn_6 = romdata[26];
+        processed_out = alu16.out;
+        if (force_error == b1) {
+          processed_out[0] = !processed_out[0]; 
+        }
         
+        if (processed_out == romdata[19:4] && alu16.zvn == romdata[2:0]) {
+          error = 2b0;
+        } else if (processed_out != romdata[19:4]) {
+          error = 2b1;
+        } else if (alu16.zvn != romdata[2:0]) {
+          error = 2b10;
+        } else {
+          error = 2b11;
+        }
+        
+        if (slowClockEdge.out == b1) { //only trigger change when slowClockEdge gives a 1
+          testerfsm.d = testerfsm.INC1;
+        }
+       testerfsm.INC1:
+       // counter = slowCounter.value;
+        testerrom.address = fsmcounter.outp;
+        //counter = slowCounter.value;
+        romdata = testerrom.testcase;
+        alu16.a = romdata[59:44];
+        alu16.b = romdata[43:28];
+        alu16.alufn = romdata[25:20];
+        alu16.alufn_6 = romdata[26];
+        processed_out = alu16.out;
+        if (force_error == b1) {
+          processed_out[0] = !processed_out[0]; 
+        }
+        
+        if (processed_out == romdata[19:4] && alu16.zvn == romdata[2:0]) {
+          error = 2b0;
+        } else if (processed_out != romdata[19:4]) {
+          error = 2b1;
+        } else if (alu16.zvn != romdata[2:0]) {
+          error = 2b10;
+        } else {
+          error = 2b11;
+        }
+        
+        if (slowClockEdge.out == b1) { //only trigger change when slowClockEdge gives a 1
+          testerfsm.d = testerfsm.INC2;
+        }
+       testerfsm.INC2:
+       // counter = slowCounter.value;
+        testerrom.address = fsmcounter.outp;
+        //counter = slowCounter.value;
+        romdata = testerrom.testcase;
+        alu16.a = romdata[59:44];
+        alu16.b = romdata[43:28];
+        alu16.alufn = romdata[25:20];
+        alu16.alufn_6 = romdata[26];
+        processed_out = alu16.out;
+        if (force_error == b1) {
+          processed_out[0] = !processed_out[0]; 
+        }
+        
+        if (processed_out == romdata[19:4] && alu16.zvn == romdata[2:0]) {
+          error = 2b0;
+        } else if (processed_out != romdata[19:4]) {
+          error = 2b1;
+        } else if (alu16.zvn != romdata[2:0]) {
+          error = 2b10;
+        } else {
+          error = 2b11;
+        }
+        
+        if (slowClockEdge.out == b1) { //only trigger change when slowClockEdge gives a 1
+          testerfsm.d = testerfsm.DEC;
+        }
+       testerfsm.DEC:
+       // counter = slowCounter.value;
+        testerrom.address = fsmcounter.outp;
+        //counter = slowCounter.value;
+        romdata = testerrom.testcase;
+        alu16.a = romdata[59:44];
+        alu16.b = romdata[43:28];
+        alu16.alufn = romdata[25:20];
+        alu16.alufn_6 = romdata[26];
+        processed_out = alu16.out;
+        if (force_error == b1) {
+          processed_out[0] = !processed_out[0]; 
+        }
+        
+        if (processed_out == romdata[19:4] && alu16.zvn == romdata[2:0]) {
+          error = 2b0;
+        } else if (processed_out != romdata[19:4]) {
+          error = 2b1;
+        } else if (alu16.zvn != romdata[2:0]) {
+          error = 2b10;
+        } else {
+          error = 2b11;
+        }
+        
+        if (slowClockEdge.out == b1) { //only trigger change when slowClockEdge gives a 1
+          testerfsm.d = testerfsm.NAND;
+        }
+        
+       testerfsm.NAND:
+       // counter = slowCounter.value;
+        testerrom.address = fsmcounter.outp;
+        //counter = slowCounter.value;
+        romdata = testerrom.testcase;
+        alu16.a = romdata[59:44];
+        alu16.b = romdata[43:28];
+        alu16.alufn = romdata[25:20];
+        alu16.alufn_6 = romdata[26];
+        processed_out = alu16.out;
+        if (force_error == b1) {
+          processed_out[0] = !processed_out[0]; 
+        }
+        
+        if (processed_out == romdata[19:4] && alu16.zvn == romdata[2:0]) {
+          error = 2b0;
+        } else if (processed_out != romdata[19:4]) {
+          error = 2b1;
+        } else if (alu16.zvn != romdata[2:0]) {
+          error = 2b10;
+        } else {
+          error = 2b11;
+        }
+        
+        if (slowClockEdge.out == b1) { //only trigger change when slowClockEdge gives a 1
+          testerfsm.d = testerfsm.NOR;
+        } 
+        
+       testerfsm.NOR:
+       // counter = slowCounter.value;
+        testerrom.address = fsmcounter.outp;
+        //counter = slowCounter.value;
+        romdata = testerrom.testcase;
+        alu16.a = romdata[59:44];
+        alu16.b = romdata[43:28];
+        alu16.alufn = romdata[25:20];
+        alu16.alufn_6 = romdata[26];
+        processed_out = alu16.out;
+        if (force_error == b1) {
+          processed_out[0] = !processed_out[0]; 
+        }
+        
+        if (processed_out == romdata[19:4] && alu16.zvn == romdata[2:0]) {
+          error = 2b0;
+        } else if (processed_out != romdata[19:4]) {
+          error = 2b1;
+        } else if (alu16.zvn != romdata[2:0]) {
+          error = 2b10;
+        } else {
+          error = 2b11;
+        }
+        
+        if (slowClockEdge.out == b1) { //only trigger change when slowClockEdge gives a 1
+          testerfsm.d = testerfsm.XNOR;
+        }
+        
+       testerfsm.XNOR:
+       // counter = slowCounter.value;
+        testerrom.address = fsmcounter.outp;
+        //counter = slowCounter.value;
+        romdata = testerrom.testcase;
+        alu16.a = romdata[59:44];
+        alu16.b = romdata[43:28];
+        alu16.alufn = romdata[25:20];
+        alu16.alufn_6 = romdata[26];
+        processed_out = alu16.out;
+        if (force_error == b1) {
+          processed_out[0] = !processed_out[0]; 
+        }
+        
+        if (processed_out == romdata[19:4] && alu16.zvn == romdata[2:0]) {
+          error = 2b0;
+        } else if (processed_out != romdata[19:4]) {
+          error = 2b1;
+        } else if (alu16.zvn != romdata[2:0]) {
+          error = 2b10;
+        } else {
+          error = 2b11;
+        }
+        
+        if (slowClockEdge.out == b1) { //only trigger change when slowClockEdge gives a 1
+          testerfsm.d = testerfsm.B;
+        }
+       testerfsm.B:
+       // counter = slowCounter.value;
+        testerrom.address = fsmcounter.outp;
+        //counter = slowCounter.value;
+        romdata = testerrom.testcase;
+        alu16.a = romdata[59:44];
+        alu16.b = romdata[43:28];
+        alu16.alufn = romdata[25:20];
+        alu16.alufn_6 = romdata[26];
         processed_out = alu16.out;
         if (force_error == b1) {
           processed_out[0] = !processed_out[0]; 
