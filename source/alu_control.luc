@@ -12,7 +12,7 @@ module alu_control (
   fsm alufsm(.clk(clk), .rst(rst)) = {IDLE,SETA,SETB,SETALUFN,OUTPUT};
   dff a_dff[16](.clk(clk), .rst(rst));
   dff b_dff[16](.clk(clk), .rst(rst));
-  dff alufn_dff[6](.clk(clk), .rst(rst));
+  dff alufn_dff[7](.clk(clk), .rst(rst));
   edge_detector goNextState(.clk(clk), #RISE(1),#FALL(0));
   alu alu16;
  
@@ -26,6 +26,7 @@ module alu_control (
     alu16.a = 16b0;
     alu16.b = 16b0;
     alu16.alufn = 5b0;
+    alu16.alufn_6 = b0;
     state = 3b000;
     zvn = alu16.zvn;
     
@@ -56,7 +57,8 @@ module alu_control (
         }
         
       alufsm.SETALUFN:
-        alufn_dff.d = inputLessSig[5:0];
+        alufn_dff.d[5:0] = inputLessSig[5:0];
+        alufn_dff.d[6] = inputLessSig[6];
         state = 3b011;
         if (goNextState.out == b1) {
           alufsm.d = alufsm.OUTPUT; 
@@ -65,7 +67,8 @@ module alu_control (
       alufsm.OUTPUT:
         alu16.a = a_dff.q;
         alu16.b = b_dff.q;
-        alu16.alufn = alufn_dff.q;
+        alu16.alufn = alufn_dff.q[5:0];
+        alu16.alufn_6 = alufn_dff.q[6];
         state = 3b100;
         out = alu16.out;
         

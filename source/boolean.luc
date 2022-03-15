@@ -5,24 +5,40 @@ module boolean (
     output out[16]
   ) {
   
-  var i;
-  var mulselector;
+
 
   always {
-    for (i=0; i<16; i++){
-      mulselector = b[i]*2 + a[i];
-    case (mulselector){
-      b00:
-      out[i] = alufn[0];
-      b01:
-      out[i] = alufn[1];
-      b10:
-      out[i] = alufn[2]; 
-      b11:
-      out[i]= alufn[3]; 
+    case(alufn[3:0]) {
+    
       default:
-      out[i]=alufn[0];
-      }
+      out=16b0;
+        
+      b1000:       //AND
+      out = a&b;   
+        
+      b1110:       //OR
+      out = a|b;
+        
+      b0110:       //XOR
+      out = a^b;
+        
+      b1010:       //"A"
+      out = a;
+        
+      b0101:      //"B"
+      out = b;
+        
+      b0001:      //// NOR
+      out = ~a & ~b; 
+        
+      b0111:     //NAND
+      out = ~(a&b);
+        
+      b1001:     //XNOR
+      out = ~(a^b);
+        
+     
+        
+        }
     }
   }
-}
