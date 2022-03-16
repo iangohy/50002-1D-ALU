@@ -49,7 +49,7 @@ module add_sub (
     z = ~orz_1;
     
     // v signal
-    xor1 = alufn ^ b[15];
+    xor1 = alufn ^ bout[15];
     and_1 = xor1 & a[15];
     and_2 = and_1 & ~fulladder.s[15];
     and_3 = ~xor1 & ~a[15];
