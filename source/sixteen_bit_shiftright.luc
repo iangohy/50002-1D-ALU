@@ -46,7 +46,6 @@ module sixteen_bit_shiftright (
       default:
       s=y;
                   
-                }
-            }
-        }
-    
+    }
+  }
+}

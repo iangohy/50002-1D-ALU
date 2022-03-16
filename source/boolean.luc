@@ -11,34 +11,31 @@ module boolean (
     case(alufn[3:0]) {
     
       default:
-      out=16b0;
+        out=16b0;
         
       b1000:       //AND
-      out = a&b;   
+        out = a&b;   
         
       b1110:       //OR
-      out = a|b;
+        out = a|b;
         
       b0110:       //XOR
-      out = a^b;
+        out = a^b;
         
       b1010:       //"A"
-      out = a;
+        out = a;
         
       b0101:      //"B"
-      out = b;
+        out = b;
         
       b0001:      //// NOR
-      out = ~a & ~b; 
+        out = ~a & ~b; 
         
       b0111:     //NAND
-      out = ~(a&b);
+        out = ~(a&b);
         
       b1001:     //XNOR
-      out = ~(a^b);
-        
-     
-        
-        }
+        out = ~(a^b);
     }
   }
+}

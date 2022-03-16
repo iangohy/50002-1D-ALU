@@ -46,7 +46,6 @@ module sixteen_bit_sra (
       default:
       s=y;
                   
-                }
-            }
-        }
-    
+    }
+  }
+}

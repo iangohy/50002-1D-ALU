@@ -2,7 +2,7 @@ module tester (
     input clk,  // clock
     input rst,  // reset
     input force_error, // forcefully flips LSB of ALU output (s)
-    input pausing_counter_reset,
+    input pausing_counter_reset,  // resets the counter
     output counter[5],
     output error[2],
     output debugSum[16]
@@ -15,7 +15,6 @@ module tester (
     CMPEQ,CMPLT,CMPLE,INC1,INC2,
     DEC,NAND,NOR,XNOR,B,END};
   counter slowClock(#SIZE(1), #DIV(26), .clk(clk), .rst(rst));
-  //counter slowCounter(#SIZE(5), #DIV(26), .clk(clk), .rst(rst));
   pausing_counter fsmcounter(.clk(slowClock.value),.rst(rst));
   edge_detector slowClockEdge(.clk(clk),#RISE(1), #FALL(1));
   alu alu16;
@@ -25,8 +24,8 @@ module tester (
   sig processed_out[16];
 
   always {
-    fsmcounter.b=5b11111;
-    fsmcounter.sel=5x{pausing_counter_reset};
+    fsmcounter.b=5b11111;  // counter reset value
+    fsmcounter.sel=5x{pausing_counter_reset}; // selector to reset counter
     slowClockEdge.in = fsmcounter.outp[0];
 
     
@@ -48,9 +47,7 @@ module tester (
           testerfsm.d = testerfsm.ADD1;
         }   
       testerfsm.ADD1:
-        //counter = slowCounter.value;
         testerrom.address = fsmcounter.outp;
-        //counter = slowCounter.value;
         romdata = testerrom.testcase;
         alu16.a = romdata[59:44];
         alu16.b = romdata[43:28];
@@ -76,9 +73,7 @@ module tester (
         
         
       testerfsm.ADD2:
-        //counter = slowCounter.value;
         testerrom.address = fsmcounter.outp;
-        //counter = slowCounter.value;
         romdata = testerrom.testcase;
         alu16.a = romdata[59:44];
         alu16.b = romdata[43:28];
@@ -104,9 +99,7 @@ module tester (
         }
         
       testerfsm.SUB1:
-        //counter = slowCounter.value;
         testerrom.address = fsmcounter.outp;
-        //counter = slowCounter.value;
         romdata = testerrom.testcase;
         alu16.a = romdata[59:44];
         alu16.b = romdata[43:28];
@@ -132,9 +125,7 @@ module tester (
         }
         
       testerfsm.SUB2:
-        //counter = slowCounter.value;
         testerrom.address = fsmcounter.outp;
-        //counter = slowCounter.value;
         romdata = testerrom.testcase;
         alu16.a = romdata[59:44];
         alu16.b = romdata[43:28];
@@ -160,9 +151,7 @@ module tester (
         }
         
       testerfsm.MUL1:
-        //counter = slowCounter.value;
         testerrom.address = fsmcounter.outp;
-        //counter = slowCounter.value;
         romdata = testerrom.testcase;
         alu16.a = romdata[59:44];
         alu16.b = romdata[43:28];
@@ -188,9 +177,7 @@ module tester (
         }
         
       testerfsm.MUL2:
-        //counter = slowCounter.value;
         testerrom.address = fsmcounter.outp;
-        //counter = slowCounter.value;
         romdata = testerrom.testcase;
         alu16.a = romdata[59:44];
         alu16.b = romdata[43:28];
@@ -216,9 +203,7 @@ module tester (
         }
         
       testerfsm.AND:
-        //counter = slowCounter.value;
         testerrom.address = fsmcounter.outp;
-        //counter = slowCounter.value;
         romdata = testerrom.testcase;
         alu16.a = romdata[59:44];
         alu16.b = romdata[43:28];
@@ -244,9 +229,7 @@ module tester (
         }
         
       testerfsm.OR:
-        //counter = slowCounter.value;
         testerrom.address = fsmcounter.outp;
-        //counter = slowCounter.value;
         romdata = testerrom.testcase;
         alu16.a = romdata[59:44];
         alu16.b = romdata[43:28];
@@ -272,9 +255,7 @@ module tester (
         }
         
       testerfsm.XOR:
-        //counter = slowCounter.value;
         testerrom.address = fsmcounter.outp;
-        //counter = slowCounter.value;
         romdata = testerrom.testcase;
         alu16.a = romdata[59:44];
         alu16.b = romdata[43:28];
@@ -300,9 +281,7 @@ module tester (
         }
         
        testerfsm.A:
-        //counter = slowCounter.value;
         testerrom.address = fsmcounter.outp;
-        //counter = slowCounter.value;
         romdata = testerrom.testcase;
         alu16.a = romdata[59:44];
         alu16.b = romdata[43:28];
@@ -330,7 +309,6 @@ module tester (
       testerfsm.SHL1:
        // counter = slowCounter.value;
         testerrom.address = fsmcounter.outp;
-        //counter = slowCounter.value;
         romdata = testerrom.testcase;
         alu16.a = romdata[59:44];
         alu16.b = romdata[43:28];
@@ -356,9 +334,7 @@ module tester (
         }
         
       testerfsm.SHL2:
-        //counter = slowCounter.value;
         testerrom.address = fsmcounter.outp;
-        //counter = slowCounter.value;
         romdata = testerrom.testcase;
         alu16.a = romdata[59:44];
         alu16.b = romdata[43:28];
@@ -384,9 +360,7 @@ module tester (
         }
         
       testerfsm.SHR1:
-        //counter = slowCounter.value;
         testerrom.address = fsmcounter.outp;
-        //counter = slowCounter.value;
         romdata = testerrom.testcase;
         alu16.a = romdata[59:44];
         alu16.b = romdata[43:28];
@@ -412,9 +386,7 @@ module tester (
         }
         
       testerfsm.SHR2:
-        //counter = slowCounter.value;
         testerrom.address = fsmcounter.outp;
-        //counter = slowCounter.value;
         romdata = testerrom.testcase;
         alu16.a = romdata[59:44];
         alu16.b = romdata[43:28];
@@ -440,9 +412,7 @@ module tester (
         }
         
       testerfsm.SRA1:
-        //counter = slowCounter.value;
         testerrom.address = fsmcounter.outp;
-        //counter = slowCounter.value;
         romdata = testerrom.testcase;
         alu16.a = romdata[59:44];
         alu16.b = romdata[43:28];
@@ -468,9 +438,7 @@ module tester (
         }
         
       testerfsm.CMPEQ:
-        //counter = slowCounter.value;
         testerrom.address = fsmcounter.outp;
-        //counter = slowCounter.value;
         romdata = testerrom.testcase;
         alu16.a = romdata[59:44];
         alu16.b = romdata[43:28];
@@ -496,9 +464,7 @@ module tester (
         }
         
       testerfsm.CMPLT:
-        //counter = slowCounter.value;
         testerrom.address = fsmcounter.outp;
-        //counter = slowCounter.value;
         romdata = testerrom.testcase;
         alu16.a = romdata[59:44];
         alu16.b = romdata[43:28];
@@ -526,7 +492,6 @@ module tester (
       testerfsm.CMPLE:
        // counter = slowCounter.value;
         testerrom.address = fsmcounter.outp;
-        //counter = slowCounter.value;
         romdata = testerrom.testcase;
         alu16.a = romdata[59:44];
         alu16.b = romdata[43:28];
@@ -553,7 +518,6 @@ module tester (
        testerfsm.INC1:
        // counter = slowCounter.value;
         testerrom.address = fsmcounter.outp;
-        //counter = slowCounter.value;
         romdata = testerrom.testcase;
         alu16.a = romdata[59:44];
         alu16.b = romdata[43:28];
@@ -580,7 +544,6 @@ module tester (
        testerfsm.INC2:
        // counter = slowCounter.value;
         testerrom.address = fsmcounter.outp;
-        //counter = slowCounter.value;
         romdata = testerrom.testcase;
         alu16.a = romdata[59:44];
         alu16.b = romdata[43:28];
@@ -607,7 +570,6 @@ module tester (
        testerfsm.DEC:
        // counter = slowCounter.value;
         testerrom.address = fsmcounter.outp;
-        //counter = slowCounter.value;
         romdata = testerrom.testcase;
         alu16.a = romdata[59:44];
         alu16.b = romdata[43:28];
@@ -635,7 +597,6 @@ module tester (
        testerfsm.NAND:
        // counter = slowCounter.value;
         testerrom.address = fsmcounter.outp;
-        //counter = slowCounter.value;
         romdata = testerrom.testcase;
         alu16.a = romdata[59:44];
         alu16.b = romdata[43:28];
@@ -663,7 +624,6 @@ module tester (
        testerfsm.NOR:
        // counter = slowCounter.value;
         testerrom.address = fsmcounter.outp;
-        //counter = slowCounter.value;
         romdata = testerrom.testcase;
         alu16.a = romdata[59:44];
         alu16.b = romdata[43:28];
@@ -691,7 +651,6 @@ module tester (
        testerfsm.XNOR:
        // counter = slowCounter.value;
         testerrom.address = fsmcounter.outp;
-        //counter = slowCounter.value;
         romdata = testerrom.testcase;
         alu16.a = romdata[59:44];
         alu16.b = romdata[43:28];
@@ -718,7 +677,6 @@ module tester (
        testerfsm.B:
        // counter = slowCounter.value;
         testerrom.address = fsmcounter.outp;
-        //counter = slowCounter.value;
         romdata = testerrom.testcase;
         alu16.a = romdata[59:44];
         alu16.b = romdata[43:28];

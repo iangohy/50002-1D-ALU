@@ -9,6 +9,7 @@ module automanual (
     output out[16],
     output misc_states[8]
   ) {
+  
   alu_control manual(.clk(clk), .rst(rst));
   tester auto(.clk(clk),.rst(rst));
   mux_2 zvn_sel[8];
@@ -23,8 +24,9 @@ module automanual (
   sig auto_error[2];
   sig combine_c[8];
   var i;
+  
   always {
-    //manual side
+    // manual side
     manual.inputMoreSig=inputMoreSig;
     manual.inputLessSig=inputLessSig;
     manual.buttonNext=buttonNext;
@@ -34,7 +36,8 @@ module automanual (
     combine_zs[2:0]=manual_state;
     combine_zs[7:5]=manual_zvn;
     combine_zs[4:3]=2b00;
-    //auto side
+    
+    // auto side
     auto.pausing_counter_reset=reset_counter;
     auto.force_error=force_error;
     auto_sum=auto.debugSum;
@@ -43,7 +46,8 @@ module automanual (
     combine_c[4:0] = auto.counter;
     combine_c[7:6] = auto_error;
     combine_c[5] = b0;
-    //add in multiplexer for output sum
+    
+    // add in multiplexer for output sum
     for (i=0;i<16;i++){
       mode_sel.a[i] = auto_sum[i];
       mode_sel.b[i] = manual_out[i];
@@ -51,8 +55,7 @@ module automanual (
       out[i] = mode_sel.out[i];
     }
     
-    //add in multiplexers to account for zvn, error, state
-
+    // add in multiplexers to account for zvn, error, state
     for (i=0; i<8; i++){
       zvn_sel.a[i] = combine_c[i];
       zvn_sel.b[i] = combine_zs[i];

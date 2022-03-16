@@ -4,17 +4,20 @@ module full_adder (
 	input cin,
 	output s,
 	output cout
-  )
-{ 
+  ) { 
+  
   sig i, j, k; // connector
+  
   always {
-	s = x ^ y ^ cin;
-	
-	i = x & y;
-	j = x & cin;
-	k = y & cin;
-	
-	cout = i | j | k;
+    // sum
+  	s = x ^ y ^ cin;
+  	
+  	i = x & y;
+  	j = x & cin;
+  	k = y & cin;
+    
+    // carryout
+  	cout = i | j | k;
  	
   }
 }

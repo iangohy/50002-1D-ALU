@@ -8,6 +8,7 @@ module add_sub (
     output v,
     output n
   ) {
+  
   full_adder fulladder[16];
   
   mux_2 incrementer[16]; // to enable incrementer/decrementer
@@ -24,9 +25,10 @@ module add_sub (
   sig and_4;
   sig bin[16];
   var i;
+  
   always {
     fulladder.x = a;
-    bin = 16b1;
+    bin = 16b1;  // for add/sub 1 in incrementor/decrementor
     for(i =0; i < 16; i++){
       incrementer.a[i] = b[i];
       incrementer.b[i] = bin[i];
@@ -39,12 +41,14 @@ module add_sub (
     out[15:0] = fulladder.s[15:0];
     cout = fulladder.cout[15];
     
+    // z signal (invert OR of all output bits)
     orz_8 = fulladder.s[7:0]|fulladder.s[15:8];
     orz_4 = orz_8[3:0]|orz_8[7:4];
     orz_2 = orz_4[1:0]|orz_4[3:2];
     orz_1 = orz_2[0]|orz_2[1];
     z = ~orz_1;
     
+    // v signal
     xor1 = alufn ^ b[15];
     and_1 = xor1 & a[15];
     and_2 = and_1 & ~fulladder.s[15];
@@ -52,6 +56,8 @@ module add_sub (
     and_4 = and_3 & fulladder.s[15];
     v = and_2 | and_4;
     
+    
+    // n signal
     n = fulladder.s[15];
   }
 }
